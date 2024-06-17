@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Flex } from "@chakra-ui/react";
+import Header from "./components/Header";
+import { colors } from "./constants/colors";
+import Home from "./Pages/Home";
+import MoodBoard from "./Pages/MoodBoard";
+import ScrollUpButton from "./components/ScrollUpButton";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+export default function App() {
+    return (
+        <Flex
+            minH='100%'
+            w='100%'
+            bg={colors["verde-militar"]}
+            color={colors["light"]}
+            flexDirection='column'
+            overflowX={"hidden"}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+            <ScrollUpButton />
+            <Home />
+            <Flex
+                bgGradient={`linear-gradient(180deg, rgba(58,90,64,1) 0%, rgba(58,90,64,1) 3%, rgba(163,177,138,1) 20%, rgba(163,177,138,1) 31%, rgba(221,161,94,1) 42%, rgba(221,161,94,1) 73%, rgba(255,138,0,1) 97%);`}
+                h='8500px'
+            >
+                <MoodBoard />
+            </Flex>
+        </Flex>
+    );
 }
-
-export default App;
