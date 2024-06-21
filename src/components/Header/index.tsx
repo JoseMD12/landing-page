@@ -1,15 +1,30 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import React from "react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import { colors } from "../../constants/colors";
 import { fontSize, fontWeight } from "../../constants/fontSize";
-import { doc } from "prettier";
 
 export default function WithSubnavigation() {
     const textLabels = [
-        "Home",
-        "Quem sou eu?",
-        "Competências",
-        "Experiência",
-        "Contato",
+        {
+            Name: "Home",
+            Id: "Home",
+        },
+        {
+            Name: "Quem sou eu?",
+            Id: "MoodBoard",
+        },
+        {
+            Name: "Competências",
+            Id: "A",
+        },
+        {
+            Name: "Experiência",
+            Id: "XP",
+        },
+        {
+            Name: "Contato",
+            Id: "Contact",
+        },
     ];
     return (
         <Box
@@ -26,29 +41,37 @@ export default function WithSubnavigation() {
         >
             <Flex w='100%' justifyContent={"space-around"}>
                 {textLabels.map((text, index) => (
-                    <Flex
+                    <Button
                         w='fit-content'
+                        key={index}
                         alignItems={"center"}
                         justifyContent={"center"}
                         h='5vh'
                         borderRadius='lg'
                         padding={2}
+                        bg='transparent'
+                        transition={"all ease-in-out 0s"}
                         _hover={{
-                            fontWeight: fontWeight["semiBold"],
+                            fontWeight: fontWeight["bold"],
                             cursor: "pointer",
                             bg: colors["laranja-principal"],
                         }}
+                        fontSize={fontSize["sm"]}
+                        color={colors["verde-militar"]}
+                        fontWeight={fontWeight["medium"]}
+                        onClick={() => {
+                            const element = document.querySelector(
+                                "#" + text.Id
+                            );
+
+                            element?.scrollIntoView({
+                                block: "start",
+                                behavior: "smooth",
+                            });
+                        }}
                     >
-                        <Text
-                            key={index}
-                            fontSize={fontSize["sm"]}
-                            onClick={() => {
-                                console.log(text);
-                            }}
-                        >
-                            {text}
-                        </Text>
-                    </Flex>
+                        {text.Name}
+                    </Button>
                 ))}
             </Flex>
         </Box>

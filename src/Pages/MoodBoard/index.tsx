@@ -1,4 +1,5 @@
-import { Flex, Text, Image, keyframes } from "@chakra-ui/react";
+import React, { useRef } from "react";
+import { Flex, Text, Image } from "@chakra-ui/react";
 import { fontSize, fontWeight } from "../../constants/fontSize";
 import { colors } from "../../constants/colors";
 import MoodBoardPng from "../../assets/Mood Board/Frame 1.png";
@@ -10,7 +11,7 @@ import {
     useScroll,
     useTransform,
 } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 const MotionFlex = motion(Flex);
 const MotionImage = motion(Image);
@@ -19,12 +20,16 @@ export default function MoodBoard() {
     const controls = useAnimation();
     const { scrollYProgress } = useScroll();
     const scale = useTransform(scrollYProgress, [0, 2], [1, 4]);
+    const ref = useRef(null);
+    const isInView = useInView(ref);
 
     useEffect(() => {
-        scale.onChange((latest) => {
-            controls.start({ scale: latest });
-        });
-    }, [scale, controls]);
+        if (isInView) {
+            scale.onChange((latest) => {
+                controls.start({ scale: latest });
+            });
+        }
+    }, [scale, controls, isInView]);
 
     return (
         <Flex
@@ -36,6 +41,7 @@ export default function MoodBoard() {
             gap='16'
         >
             <Text
+                id='MoodBoard'
                 fontSize={fontSize["xl"]}
                 fontWeight={fontWeight["bold"]}
                 color={colors["light"]}
@@ -62,12 +68,14 @@ export default function MoodBoard() {
             </Text>
 
             <MotionFlex
-                transition={{ type: "spring", stiffness: 100 }}
+                transition={{ type: "spring", stiffness: 50 }}
+                ref={ref}
                 animate={controls}
                 w='full'
                 justifyContent='center'
+                pt='5vh'
             >
-                <MotionImage w='50vw' src={MoodBoardPng} alt='Developer' />
+                <MotionImage w='50%' src={MoodBoardPng} alt='Developer' />
             </MotionFlex>
         </Flex>
     );

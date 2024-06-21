@@ -1,3 +1,4 @@
+import React from "react";
 import { ArrowUpIcon } from "@chakra-ui/icons";
 import { Button, Flex } from "@chakra-ui/react";
 import { colors } from "../../constants/colors";

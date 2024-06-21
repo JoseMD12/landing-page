@@ -1,3 +1,4 @@
+import React from "react";
 import { Circle, Flex, Image, Text } from "@chakra-ui/react";
 import { colors } from "../../constants/colors";
 import { fontSize, fontWeight } from "../../constants/fontSize";
@@ -9,7 +10,7 @@ export default function Home() {
         <Flex flexDirection='column'>
             <Header />
 
-            <Flex w='100vw' pt='5vh' id='Home'>
+            <Flex w='full' pt='5vh' id='Home'>
                 <Flex pt='14vh' pl='10vw' flexDirection='column' w='50%'>
                     <Text
                         pb='2vh'
@@ -49,9 +50,9 @@ export default function Home() {
                     </Text>
                 </Flex>
 
-                <Flex pt='5vh' pl='8vw' w='50vw'>
+                <Flex pt='5vh' pl='10vw' w='50%'>
                     <Circle bg={colors["laranja-principal"]}>
-                        <Image src={Shrek} alt='Shrek' boxSize='70vh' />
+                        <Image src={Shrek} alt='Shrek' w='30vw' />
                     </Circle>
                 </Flex>
             </Flex>
